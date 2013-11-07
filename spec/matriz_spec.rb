@@ -1,50 +1,44 @@
 
-
 require 'matriz.rb'
 require 'rspec'
 
 describe Matriz do
   
   before :each do
-    @m1 = Matriz.new([[1,3],[2,0]])
-    @m2 = Matriz.new([[2,1],[0,1]])
-    @m3 = Matriz.new([[2,0,1],[3,0,0],[5,1,1]])
-    @m4 = Matriz.new([[4,1,6],[2,0,1]])
+    @mat1 = Matriz.new([[7,2],[2,7]])
+    @mat2 = Matriz.new([[4,4],[4,4]])
+    @mat3 = Matriz.new([[2,4,2],[1,3,1],[3,5,3]])
+    @mat4 = Matriz.new([[1,2,3],[4,5,6],[7,8,9]])
   end
 
-  describe "# Se crean las matrices del tamanio especificado e inicialidas" do
-    it "Se establecen correctamente las dimensiones" do
-      @m1.mCol.should == 2
-      @m1.nFil.should == 2
-      @m3.mCol.should == 3
-      @m3.nFil.should == 3
+  describe "# Creacion de matrices" do
+    it "Dimensiones establecidas correctamente" do
+      @mat1.nC.should eq (2)
+      @mat1.nF.should eq (2)
+      @mat3.nC.should eq (3)
+      @mat3.nF.should eq (3)
     end
-    it "Se inicializa correctamente" do
-      @m1.to_s.should == "1 3 \n2 0 \n"
-      @m2.to_s.should == "2 1 \n0 1 \n"
-      @m3.to_s.should == "2 0 1 \n3 0 0 \n5 1 1 \n"
-    end
-  end
-
-  describe "Multiplicar por un escalar" do
-    it "Multiplicacion" do
-      ((@m3.x(2)).matriz.should == Matriz.new([[4,0,2],[6,0,0],[10,2,2]]).matriz)
-      ((@m1.x(-3)).matriz.should == Matriz.new([[-3,-9],[-6,0]]).matriz)
+    it "Se muestra correctamente" do
+      @mat1.to_s.should eq "7 2 \n2 7 \n"
+      @mat2.to_s.should eq "4 4 \n4 4 \n"
+      @mat3.to_s.should eq "2 4 2 \n1 3 1 \n3 5 3 \n"
+      @mat4.to_s.should eq "1 2 3 \n4 5 6 \n7 8 9 \n"
     end
   end
 
-  describe "Operaciones con dos matrices" do
-    it "Se deben poder sumar dos matrices" do
-      ((@m1 + @m2).matriz.should == Matriz.new([[3,4],[2,1]]).matriz)
+  describe "Operaciones de matrices cuadradas" do
+    it "Suma de matrices" do
+      ((@mat1 + @mat2).matriz.should eq Matriz.new([[11,6],[6,11]]).matriz)
+      ((@mat3 + @mat4).matriz.should eq Matriz.new([[3,6,5],[5,8,7],[10,13,12]]).matriz)
     end
-    it "Se deben poder multiplicar dos matrices" do
-      ((@m1 * @m2).matriz.should == Matriz.new([[2,4],[4,2]]).matriz)
-      ((@m1 * @m4).matriz.should == Matriz.new([[10,1,9],[8,2,12]]).matriz)
+    it "Resta de matrices" do
+      ((@mat1 - @mat2).matriz.should eq Matriz.new([[3,-2],[-2,3]]).matriz)
+      ((@mat3 - @mat4).matriz.should eq Matriz.new([[1,2,-1],[-3,-2,-5],[-4,-3,-6]]).matriz)
     end
-    it "Se deben poder restar dos matrices" do
-      ((@m1 - @m2).matriz.should == Matriz.new([[-1,2],[2,-1]]).matriz)
-    end
+    it "Producto de matrices" do
+      ((@mat1 * @mat2).matriz.should eq Matriz.new([[36,152],[36,172]]).matriz)
+      #((@mat3 * @mat4).matriz.should eq Matriz.new([[10,1,9],[8,2,12]]).matriz)
+    end    
   end
 
 end
-
