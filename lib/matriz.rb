@@ -8,13 +8,7 @@ class Matriz
     @nFil = matriz.size
     @mCol = matriz[0].size
     @matriz = matriz
-    @mamama = 1
   end
-
-def mamam
-   return @mamama
-end
-
 
   def to_s
     matString = ""
