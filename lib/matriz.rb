@@ -9,16 +9,17 @@ class Matriz
     @nC = matriz[0].size
     @matriz = matriz
   end
-
+  
+  # Almacenar matriz en String
   def to_s
-    matString = ""
+    matS = ""
     for i in 0...@nF do
       for j in 0...@nC do
-        matString = matString + @matriz[i][j].to_s + " "
+        matS = matS + @matriz[i][j].to_s + " "
       end
-      matString = matString + "\n"
+      matS = matS + "\n"
     end
-    matString
+    matS
   end
 
   # Suma de Matrices
@@ -45,7 +46,14 @@ class Matriz
 
   # Producto de Matrices
   def *(mat)
-   d = Matriz.new(@matriz)
+     aux = Array.new
+      for i in 0...@nF do
+        aux[i] = Array.new
+        for j in 0...@nC do
+          aux[i][j] = 0
+        end
+      end
+     d = Matriz.new(aux)
      for i in (0...@nF) do
         for j in (0...@nC) do
            sum = 0;
@@ -57,6 +65,4 @@ class Matriz
      end
   d
   end
-
-
 end
