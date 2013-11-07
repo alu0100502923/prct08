@@ -1,4 +1,3 @@
-
 require 'matriz.rb'
 require 'rspec'
 
@@ -36,9 +35,8 @@ describe Matriz do
       ((@mat3 - @mat4).matriz.should eq Matriz.new([[1,2,-1],[-3,-2,-5],[-4,-3,-6]]).matriz)
     end
     it "Producto de matrices" do
-      ((@mat1 * @mat2).matriz.should eq Matriz.new([[36,152],[36,172]]).matriz)
-      #((@mat3 * @mat4).matriz.should eq Matriz.new([[10,1,9],[8,2,12]]).matriz)
+      ((@mat1 * @mat2).matriz.should eq Matriz.new([[36,36],[36,36]]).matriz)
+      ((@mat3 * @mat4).matriz.should eq Matriz.new([[32,40,48],[20,25,30],[44,55,66]]).matriz)
     end    
   end
-
 end
