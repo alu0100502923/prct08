@@ -2,18 +2,18 @@
 
 class Matriz
 
-  attr_accessor :nFil , :mCol, :matriz
+  attr_accessor :nF , :nC, :matriz
 
   def initialize (matriz)
-    @nFil = matriz.size
-    @mCol = matriz[0].size
+    @nF = matriz.size
+    @nC = matriz[0].size
     @matriz = matriz
   end
 
   def to_s
     matString = ""
-    for i in 0...@nFil do
-      for j in 0...@mCol do
+    for i in 0...@nF do
+      for j in 0...@nC do
         matString = matString + @matriz[i][j].to_s + " "
       end
       matString = matString + "\n"
@@ -21,70 +21,42 @@ class Matriz
     matString
   end
 
-  # Metodo para multiplicar una matriz por un escalar
-  def x(escalar)
-    aux = Matriz.new(@matriz)
-    for i in 0...@nFil do
-      for j in 0...@mCol do
-        aux.matriz[i][j] = @matriz[i][j] * escalar
-      end
-    end
-    aux
+  # Suma de Matrices
+  def +(mat)  
+    d = Matriz.new(@matriz)
+      for i in (0...@nF) do
+        for j in (0...@nC) do
+           d.matriz[i][j] = (@matriz[i][j] + mat.matriz[i][j])
+        end 
+      end  
+  d     
   end
 
-  #Metodo apra sumar dos matrices
-  def +(mat)
-    if (mat.nFil == @nFil && mat.mCol == @mCol)
-      aux = Matriz.new(@matriz)
-      for i in 0...@nFil do
-        for j in 0...@mCol do
-          aux.matriz[i][j] = @matriz[i][j] + mat.matriz[i][j]
-        end
-      end
-    else
-      aux = 0
-    end
-    aux
-  end
-
-  # Metodo para restar dos matrices
+  # Resta de Matrices
   def -(mat)
-    if (mat.nFil == @nFil && mat.mCol == @mCol)
-      aux = Matriz.new(@matriz)
-      for i in 0...@nFil do
-        for j in 0...@mCol do
-          aux.matriz[i][j] = @matriz[i][j] - mat.matriz[i][j]
-        end
-      end
-    else
-      aux = 0
-    end
-    aux
+    d = Matriz.new(@matriz)
+      for i in (0...@nF) do
+        for j in (0...@nC) do
+           d.matriz[i][j] = (@matriz[i][j] - mat.matriz[i][j])
+        end 
+      end  
+  d     
   end
 
-  # Metodo para multiplicar dos matrices
+  # Producto de Matrices
   def *(mat)
-    if (@mCol == mat.nFil)
-      result = Array.new
-      for i in 0...@nFil do
-        result[i] = Array.new
-        for j in 0...mat.mCol do
-          result[i][j] = 0
-        end
-      end
-
-      aux = Matriz.new(result)
-
-      for i in 0...@nFil do
-        for j in 0...mat.mCol do
-          for z in 0...@mCol do
-            aux.matriz[i][j] += @matriz[i][z] * mat.matriz[z][j]
-          end
-        end
-      end
-    else
-      aux = 0
-    end
-    aux
+   d = Matriz.new(@matriz)
+     for i in (0...@nF) do
+        for j in (0...@nC) do
+           sum = 0;
+           for k in (0...@nC) do
+              sum += (@matriz[i][k] * mat.matriz[k][j])
+           end
+        d.matriz[i][j] = sum
+        end        
+     end
+  d
   end
+
+
 end
