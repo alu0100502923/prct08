@@ -12,12 +12,6 @@ describe Matriz do
     @m4 = Matriz.new([[4,1,6],[2,0,1]])
   end
 
-   describe "mamama" do
-      it "telokoae" do
-      @m1.mamam.should equal(2)
-      end
-   end
-
   describe "# Se crean las matrices del tamanio especificado e inicialidas" do
     it "Se establecen correctamente las dimensiones" do
       @m1.mCol.should == 2
